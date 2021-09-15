@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  pismo-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pismo-api-image
+    container_name: pismo-api
+    tty: true
+    working_dir: /var/www/html
+    networks:
+      - pismo_network
+    volumes:
+      - .:/var/www/html
+    links:
+      - pismo-mysql
+
+  pismo-mysql:
+    image: mysql:8.0
+    container_name: pismo-mysql
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_HOST: localhost
+      SERVICE_TAGS: dev
+      SERVICE_NAME: pismo-mysql
+      MYSQL_DATABASE: pismo
+    networks:
+      - pismo_network
+    volumes:
+      - ./storages/mysql:/var/lib/mysql:delegated
+      - ./images/mysql/conf.d:/etc/mysql/conf.d
+      - ./databases/init/mysql:/docker-entrypoint-initdb.d
+
+# networks
+networks:
+  pismo_network:
+    name: pismo
