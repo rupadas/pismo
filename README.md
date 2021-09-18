@@ -23,8 +23,20 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-##Steps to setup
+## Install `docker`
+For a detailed guide on how to install Docker, see [docker](https://docs.docker.com/engine/install/ubuntu/).
+
+Please be sure that you uninstall old versions of Docker:
+
+## Command to build the pismo image
+docker-compose up
+
+## Database Migartion
 php artisan migrate
+
+## Database Seed
 php artisan db:seed
+
+## Server program
 php -S localhost:<any_available_port> -t public
 
