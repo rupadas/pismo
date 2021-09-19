@@ -31,12 +31,6 @@ Please be sure that you uninstall old versions of Docker:
 ## Command to build the pismo image
 docker-compose up
 
-## Database Migartion
-php artisan migrate
-
-## Database Seed
-php artisan db:seed
-
 ## Server program
-php -S localhost:<any_available_port> -t public
+docker exec -it pismo-api  php -S 0.0.0.0:8084 -t public
 
